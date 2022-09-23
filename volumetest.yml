@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deployment
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector: 
+    matchLabels:
+      app: nnwebserver
+  template:
+    metadata:
+      name: tomcat-nginx
+      labels:
+        app: nnwebserver
+    spec:
+      containers:
+        - name: tomcat
+          image: srikanthkittane/tomcat1.0:warcopy
+          volumeMounts: 
+            - mountPath: /usr/local/tomcat/webapps
+              name: pvc-vol
+      volumes:
+        - persistentVolumeClaim:
+            claimName: ebs-claim-static
+          name: pvc-vol        
+               

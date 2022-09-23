@@ -1,0 +1,29 @@
+apiVersion:apps/v1
+kind: Deployment
+metadata:
+  name: bitbucket-deployment
+  namespace: bitns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitbucket
+  template:
+    metadata:
+      name: bit_bucket      
+      labels:
+        app: bitbucket
+    spec:
+      containers:
+        - name: bit-bucket
+          image: atlassian/bitbucket-server
+          volumeMounts:
+            - mountPath: /var/atlassian/application-data/bitbucket
+              name: bitbucket-data      
+      volumes:
+        - name: "bitbucket-data"
+          hostPath:
+             path: "/bitbucket-data"      
+
+
+

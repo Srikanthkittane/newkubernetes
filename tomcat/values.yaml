@@ -1,0 +1,13 @@
+namespace: "tomnamespace"
+depname: "tomcat_deployment"
+replicas: 3
+maxsurge: 1
+maxunavialable: 0
+label: "nnwebserver"
+metadataname: "tomcat"
+containername: "tomcat_container"
+imagename: "srikanthkittane/tomcat1.0"
+tagname: "warcopy"
+portname: "tomcat_port"
+portno: 8086
+targetport: 8080

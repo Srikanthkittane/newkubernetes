@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.meta_data }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxsurge }}
+      maxUnavailable: {{ .Values.max_un }}
+  selector:
+    matchLabels:
+      app: {{ .Values.label }}
+  template:
+    metadata:
+      name: {{ .Values.temp_name }} 
+      labels:
+        app: {{ .Values.label }}
+    spec:
+      containers:
+        - name: {{ .Values.con_name }}
+          image: {{ .Values.image}}:{{ .Values.tag }}

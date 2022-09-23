@@ -1,0 +1,15 @@
+namespace: "jenkins_namespace"
+meta_data: "jenkins_deployment"
+replicas: 3
+maxsurge: 1
+max_un: 0
+label: "jenk_one"
+temp_name: "jenkins"
+con_name: "jenkins_container"
+image: "jenkins/jenkins"
+tag: "lts"
+serv_name: "jenkins_service"
+portname: "jenk_port"
+portno: 8085
+targetport: 8080
+

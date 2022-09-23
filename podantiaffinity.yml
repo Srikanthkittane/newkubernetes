@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deployment
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 2
+  selector: 
+    matchLabels:
+      app: nnwebserver
+  template:
+    metadata:
+      name: tomcat-nginx-2
+      labels:
+        app: nnwebserver
+    spec:
+      containers:
+        - name: tomcat
+          image: kavana147/tomcat:9
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nnwebserver
+              topologyKey: "kubernetes.io/hostname"

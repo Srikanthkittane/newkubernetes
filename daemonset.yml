@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: tomcat-daemon
+spec:
+  selector: 
+    matchLabels:
+      app: daemonset
+  template:
+    metadata:
+      name: tomcat-nginx-daemon
+      labels:
+        app: daemonset
+    spec:
+      containers:
+        - name: tomcat
+          image: kavana147/tomcat:9
